@@ -1,0 +1,90 @@
+﻿@model FinalProject_Eduhome.ViewModels.HomeVM
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.EduTitle = "Blog";
+}
+
+<!-- Banner Area Start -->
+@{
+    Html.RenderPartial("~/Views/Shared/Banner.cshtml", Model);
+}
+<!-- Banner Area End -->
+<!-- Blog Start -->
+<div class="blog-area pt-150 pb-150">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="blog-sidebar left">
+                    <!-- Search Start -->
+                    @{
+                        Html.RenderPartial("~/Views/Shared/Search.cshtml", new FinalProject_Eduhome.ViewModels.SearchVM { Page = "Blog" });
+                    }
+                    <!-- Search End -->
+                    <div class="single-blog-widget mb-50">
+                        <h3>categories</h3>
+                        <ul>
+                            @foreach (var item in Model.Categories)
+                            {
+                                <li><a href="#">@item.Name (@(item.Blogs!=null?item.Blogs.Count:0))</a></li>
+                            }
+                        </ul>
+                    </div>
+                    @{
+                        Html.RenderPartial("~/Views/Shared/Sidebar.cshtml", Model.Blogs);
+                    }
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="row">
+                    @foreach (var item in Model.Blogs)
+                    {
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="single-blog mb-60">
+                                <div class="blog-img">
+                                    <a href="@Url.Action("Details","Blog",new { id=item.Id})"><img src="~/Uploads/@item.Image" alt="blog"></a>
+                                    <div class="blog-hover">
+                                        <i class="fa fa-link"></i>
+                                    </div>
+                                </div>
+                                <div class="blog-content">
+                                    <div class="blog-top">
+                                        <p>By @item.Author /  @item.CreatedDate.ToString("MMMM dd"), @item.CreatedDate.Year  /  <i class="fa fa-comments-o"></i> @item.Read</p>
+                                    </div>
+                                    <div class="blog-bottom">
+                                        <h2><a href="@Url.Action("Details","Blog",new { id=item.Id})">@item.Title</a></h2>
+                                        <a href="@Url.Action("Details","Blog",new { id=item.Id})">read more</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <div class="col-md-12">
+                        <div class="pagination">
+                            <ul>
+                                @for (int i = 1; i <= Model.pageCount; i++)
+                                {
+                                    if (i == Model.currentPage)
+                                    {
+                                        <li><a href="#" style="color: #fff; background: #2C2B5E;">@i</a></li>
+
+                                    }
+                                    else
+                                    {
+                                        <li><a href="@Url.Action("Index","Blog",new{page=i })">@i</a></li>
+                                    }
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Blog End -->
+<!-- Subscribe Start -->
+@{
+    Html.RenderPartial("~/Views/Shared/Subscribe.cshtml", new FinalProject_Eduhome.ViewModels.SubscribeVM { Page = "Blog" });
+}
+<!-- Subscribe End -->

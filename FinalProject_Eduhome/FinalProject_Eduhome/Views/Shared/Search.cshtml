@@ -1,0 +1,15 @@
+﻿@model FinalProject_Eduhome.ViewModels.SearchVM
+@using (Html.BeginForm("Search", "Search",FormMethod.Post))
+{
+    <div class="single-blog-widget mb-50">
+        <h3>search</h3>
+        <div class="blog-search" style="position: relative;">
+            @Html.EditorFor(model => model.SearchText, new { htmlAttributes = new { @placeholder = "Search...",@style= "border: 1px solid #E1E1E1; padding: 11px 43px 11px 12px; width: 100 %; " } })
+
+            <button type="submit" style="position: absolute; width: 43px;height: 43px;">
+                <span><i class="fa fa-search"></i></span>
+            </button>
+            <input type="hidden" name="Page" value="@Model.Page" />
+        </div>
+    </div>
+}

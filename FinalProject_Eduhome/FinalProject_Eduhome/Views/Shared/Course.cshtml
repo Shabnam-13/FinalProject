@@ -1,0 +1,23 @@
+﻿@model List<FinalProject_Eduhome.Models.Course>
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4 col-sm-6 col-xs-12">
+            <div class="single-course mb-70">
+                <div class="course-img">
+                    <a href="@Url.Action("Details","Course", new {id=item.Id })">
+                        <img src="~/Uploads/@item.Image" alt="course">
+                        <div class="course-hover">
+                            <i class="fa fa-link"></i>
+                        </div>
+                    </a>
+                </div>
+                <div class="course-content">
+                    <h3><a href="@Url.Action("Details","Course", new {id=item.Id })">@item.Name</a></h3>
+                    <p>@(item.Content.Length > 150 ? item.Content.Substring(0, 150) : item.Content)</p>
+                    <a class="default-btn" href="@Url.Action("Details","Course", new {id=item.Id })">read more</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

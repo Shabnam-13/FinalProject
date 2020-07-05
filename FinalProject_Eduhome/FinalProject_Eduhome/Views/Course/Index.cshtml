@@ -1,0 +1,33 @@
+﻿@model FinalProject_Eduhome.ViewModels.HomeVM
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.EduTitle = "COURSES";
+}
+<!-- Banner Area Start -->
+@{
+    Html.RenderPartial("~/Views/Shared/Banner.cshtml", Model);
+}
+<!-- Banner Area End -->
+<!-- Course Start -->
+    <div class="course-area pt-80 pb-80">
+        <div class="container">
+            <!-- Search Start -->
+            @{
+                Html.RenderPartial("~/Views/Shared/Search.cshtml", new FinalProject_Eduhome.ViewModels.SearchVM { Page = "Course" });
+            }
+            <!-- Search End -->
+
+        <!-- Course Start -->
+        @{
+            Html.RenderPartial("~/Views/Shared/Course.cshtml", Model.Courses);
+        }
+        <!-- Course Start -->
+    </div>
+</div>
+<!-- Course End -->
+<!-- Subscribe Start -->
+@{
+    Html.RenderPartial("~/Views/Shared/Subscribe.cshtml", new FinalProject_Eduhome.ViewModels.SubscribeVM { Page = "Course" });
+}
+<!-- Subscribe End -->

@@ -1,0 +1,52 @@
+﻿@model FinalProject_Eduhome.ViewModels.MessageVM
+<!-- Message Start -->
+
+<div class="reply-area">
+    <h3>LEAVE A REPLY</h3>
+    <p>I must explain to you how all this a mistaken idea of ncing great explorer of the rut<br> the is lder of human happinescias unde omnis iste natus error sit volptatem </p>
+    <form action="@Url.Action("Message","Home")" method="post">
+        <div class="row">
+            <div class="col-md-12">
+                <p>Name</p>
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            <div class="col-md-12">
+                <p>Email</p>
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @type = "Email" } })
+            </div>
+            <div class="col-md-12">
+                <p>Subject</p>
+                @Html.EditorFor(model => model.Subject, new { htmlAttributes = new { @class = "form-control" } })
+
+                <p>Massage</p>
+                @Html.TextAreaFor(model => model.Content, new { htmlAttributes = new { @class = "form-control",@style= "height: 150px;" } })
+            </div>
+        </div>
+        <button class="reply-btn" type="submit" style="background: #2C2B5E;color: #fff;text-transform: uppercase; font-family: 'Open Sans', sans-serif; padding: 8px 25px;font-weight: 700; display: inline-block;"><span>send message</span></button>
+        <input type="hidden" name="Page" value="@Model.Page" />
+        <input type="hidden" name="itemId" value="@Model.ItemId" />
+        <p class="form-messege"></p>
+
+        @if (Session["SuccessfullMessage"] != null)
+        {
+            Session["SuccessfullMessage"] = null;
+            <div class="alert alert-success">
+                Message send successfully!
+            </div>
+        } @if (Session["EmptySbjectOrContent"] != null)
+        {
+            Session["EmptySbjectOrContent"] = null;
+            <div class="alert alert-danger">
+                Please enter your message
+            </div>
+        }
+        @if (Session["EmptyEmailOrName"] != null)
+        {
+            Session["EmptyEmailOrName"] = null;
+            <div class="alert alert-danger">
+                Email and name is required!
+            </div>
+        }
+    </form>
+</div>
+<!-- Message End -->

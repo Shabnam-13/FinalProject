@@ -1,0 +1,68 @@
+﻿@model FinalProject_Eduhome.ViewModels.HomeVM
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.EduTitle = "Blog / DETAILS";
+}
+
+<!-- Banner Area Start -->
+@{
+    Html.RenderPartial("~/Views/Shared/Banner.cshtml", Model);
+}
+<!-- Banner Area End -->
+<!-- Blog Start -->
+<div class="blog-details-area pt-150 pb-140">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="blog-details">
+                    <div class="blog-details-img">
+                        <img src="~/Uploads/@Model.blog.Image" alt="blog-details" style="width:100%">
+                    </div>
+                    <div class="blog-details-content">
+                        <h2>@Model.blog.Title</h2>
+                        <h6>By @Model.blog.Author  /  @Model.blog.CreatedDate.ToString("MMMM dd"), @Model.blog.CreatedDate.Year  /  <i class="fa fa-comments-o"></i> @Model.blog.Read</h6>
+                        <p>@Html.Raw(Model.blog.Content)</p>
+                    </div>
+
+                    <!-- Message Area Start -->
+                    @{
+                        Html.RenderPartial("~/Views/Shared/Message.cshtml", new FinalProject_Eduhome.ViewModels.MessageVM { Page = "BlogDetails", ItemId = Model.blog.Id });
+                    }
+                    <!-- Message Area End -->
+
+                </div>
+            </div>
+            <!-- Sidebar Area Start -->
+            <div class="col-md-4">
+                <div class="blog-sidebar right">
+                    <!-- Search Start -->
+                    @{
+                        Html.RenderPartial("~/Views/Shared/Search.cshtml", new FinalProject_Eduhome.ViewModels.SearchVM { Page = "Blog" });
+                    }
+                    <!-- Search End -->
+                    <div class="single-blog-widget mb-47">
+                        <h3>categories</h3>
+                        <ul>
+                            @foreach (var item in Model.Categories)
+                            {
+                                <li><a href="#">@item.Name @(item.Blogs!=null?item.Blogs.Count:0))</a></li>
+                            }
+                        </ul>
+                    </div>
+                    @{
+                        Html.RenderPartial("~/Views/Shared/Sidebar.cshtml", Model.Blogs);
+                    }
+                </div>
+            </div>
+            <!-- Sidebar Area End -->
+
+        </div>
+    </div>
+</div>
+<!-- Blog End -->
+<!-- Subscribe Start -->
+@{
+    Html.RenderPartial("~/Views/Shared/Subscribe.cshtml", new FinalProject_Eduhome.ViewModels.SubscribeVM { Page = "BlogDetails",ItemId=Model.blog.Id });
+}
+<!-- Subscribe End -->

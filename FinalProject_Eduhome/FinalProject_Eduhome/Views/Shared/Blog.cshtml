@@ -1,0 +1,24 @@
+﻿@model List<FinalProject_Eduhome.Models.Blog>
+@foreach (var item in Model.Take(3))
+{
+    <div class="col-md-4 col-sm-6 col-xs-12 pt-30">
+        <div class="single-blog">
+            <div class="blog-img">
+                <a href="@Url.Action("Details","Blog",new { id=item.Id})"><img src="~/Uploads/@item.Image" alt="blog"></a>
+                <div class="blog-hover">
+                    <a href="@Url.Action("Details","Blog",new { id=item.Id})"><i class="fa fa-link"></i></a>
+                </div>
+            </div>
+            <div class="blog-content">
+                <div class="blog-top">
+                    <p>By @item.Author  /  @item.CreatedDate.ToString("MMMM dd"), @item.CreatedDate.Year /  <i class="fa fa-comments-o"></i> @item.Read</p>
+                </div>
+                <div class="blog-bottom">
+                    <h2><a href="@Url.Action("Details","Blog",new { id=item.Id})">@item.Title </a></h2>
+                    <a href="@Url.Action("Details","Blog",new { id=item.Id})">read more</a>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+

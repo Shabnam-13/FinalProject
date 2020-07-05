@@ -1,0 +1,85 @@
+﻿@model FinalProject_Eduhome.ViewModels.HomeVM
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.EduTitle = "Event / DETAILS";
+
+}
+
+<!-- Banner Area Start -->
+@{
+    Html.RenderPartial("~/Views/Shared/Banner.cshtml", Model);
+}
+<!-- Banner Area End -->
+<!-- Event Details Start -->
+<div class="event-details-area blog-area pt-150 pb-140">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="event-details">
+                    <div class="event-details-img">
+                        <img src="~/Uploads/@Model.event1.Image" alt="event-details" style="width:100%">
+                        <div class="event-date">
+                            <h3>@Model.event1.EventDate.Day <span>@Model.event1.EventDate.ToString("MMM")</span></h3>
+                        </div>
+                    </div>
+                    <div class="event-details-content">
+                        <h2>@Model.event1.Title</h2>
+                        <ul>
+                            <li><span>time : </span>@Model.event1.EventTime</li>
+                            <li><span>venue : </span>@Model.event1.Venue @Model.event1.City</li>
+                        </ul>
+                        <p>@Html.Raw(Model.event1.Content)</p>
+                        <div class="speakers-area fix">
+                            <h4>speakers</h4>
+                            @foreach (var item in Model.EventInfos.Where(e => e.EventId == Model.event1.Id))
+                            {
+                                <div class="single-speaker">
+                                    <div class="speaker-img">
+                                        <img src="~/Uploads/@item.Speaker.Image" alt="speaker" style="width:100px">
+                                    </div>
+                                    <div class="speaker-name">
+                                        <h5>@item.Speaker.FullName</h5>
+                                        <p>@item.Speaker.Position, @item.Speaker.Company </p>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <!-- Message Area Start -->
+                    @{
+                        Html.RenderPartial("~/Views/Shared/Message.cshtml", new FinalProject_Eduhome.ViewModels.MessageVM { Page = "EventDetails", ItemId = Model.event1.Id });
+                    }
+                    <!-- Message Area End -->
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="blog-sidebar right">
+                    <!-- Search Start -->
+                    @{
+                        Html.RenderPartial("~/Views/Shared/Search.cshtml", new FinalProject_Eduhome.ViewModels.SearchVM { Page = "Event" });
+                    }
+                    <!-- Search End -->                   
+                    <div class="single-blog-widget mb-50">
+                        <h3>categories</h3>
+                        <ul>
+                            @foreach (var item in Model.Categories)
+                            {
+                                <li><a href="#">@item.Name (@(item.Events!=null?item.Events.Count:0))</a></li>
+                            }
+                        </ul>
+                    </div>
+                    @{
+                        Html.RenderPartial("~/Views/Shared/Sidebar.cshtml", Model.Blogs);
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Event Details End -->
+<!-- Subscribe Start -->
+@{
+    Html.RenderPartial("~/Views/Shared/Subscribe.cshtml", new FinalProject_Eduhome.ViewModels.SubscribeVM { Page = "EventDetails",ItemId=Model.event1.Id });
+}
+<!-- Subscribe End -->

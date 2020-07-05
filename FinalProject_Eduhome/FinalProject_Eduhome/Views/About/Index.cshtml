@@ -1,0 +1,49 @@
+﻿@model FinalProject_Eduhome.ViewModels.HomeVM
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.EduTitle = "About us";
+}
+
+<!-- Banner Area Start -->
+@{
+    Html.RenderPartial("~/Views/Shared/Banner.cshtml", Model);
+}
+<!-- Banner Area End -->
+<!-- About Start -->
+@{
+    Html.RenderPartial("~/Views/Shared/About.cshtml", Model);
+}
+<!-- About End -->
+<!-- Teacher Start -->
+<div class="teacher-area pb-150">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="section-title text-center">
+                    <img src="~/Uploads/@ViewBag.About.Icon" alt="title">
+                    <h2>meet our teachers</h2>
+                </div>
+            </div>
+        </div>
+        @{
+            Html.RenderPartial("~/Views/Shared/Teachers.cshtml", Model.Teachers);
+        }
+    </div>
+</div>
+<!-- Teacher End -->
+<!-- Testimonial Area Start -->
+@{
+    Html.RenderPartial("~/Views/Shared/Testimonials.cshtml", Model.Testimonials);
+}
+<!-- Testimonial Area End -->
+<!-- Notice Start -->
+@{
+    Html.RenderPartial("~/Views/Shared/Notice.cshtml", Model.Events);
+}
+<!-- Notice End -->
+<!-- Subscribe Start -->
+@{
+    Html.RenderPartial("~/Views/Shared/Subscribe.cshtml", new FinalProject_Eduhome.ViewModels.SubscribeVM { Page = "About" });
+}
+<!-- Subscribe End -->

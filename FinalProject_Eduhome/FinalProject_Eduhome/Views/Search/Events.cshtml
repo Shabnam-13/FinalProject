@@ -1,0 +1,48 @@
+﻿@model List<FinalProject_Eduhome.Models.Event>
+@{
+    ViewBag.Title = "Events";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.EduTitle = "Search";
+
+}
+<!-- Banner Area Start -->
+@{
+    Html.RenderPartial("~/Views/Shared/Banner.cshtml", Model);
+}
+<!-- Banner Area End -->
+<!-- Event Start -->
+<div class="event-area three text-center pt-150 pb-150">
+    <div class="container">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    <div class="single-event mb-60">
+                        <div class="event-img">
+                            <a href="@Url.Action("Details","Event",new { id=item.Id})">
+                                <img src="~/Uploads/@item.Image" alt="event">
+                                <div class="course-hover">
+                                    <i class="fa fa-link"></i>
+                                </div>
+                            </a>
+                            <div class="event-date">
+                                <h3>@item.EventDate.Day <span>@item.EventDate.ToString("MMM")</span></h3>
+                            </div>
+                        </div>
+                        <div class="event-content text-left">
+                            <h4><a href="@Url.Action("Details","Event",new { id=item.Id})">@item.Title</a></h4>
+                            <ul>
+                                <li><span>time:</span>@item.EventTime</li>
+                                <li><span>venue</span> @item.City City</li>
+                            </ul>
+                            <div class="event-content-right">
+                                <a class="default-btn" href="@Url.Action("Details","Event",new { id=item.Id})">join now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<!-- Event End -->
